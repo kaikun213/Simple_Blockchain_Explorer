@@ -15,6 +15,12 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.json', '.jsx']
+    extensions: ['.js', '.json', '.jsx'],
+    alias: {
+    	'oo7':path.resolve(__dirname, 'oo7'),
+	'oo7-react':path.resolve(__dirname, 'oo7-react'),
+	'oo7-parity':path.resolve(__dirname, 'oo7-parity'),
+    	'parity-reactive-ui':path.resolve(__dirname, 'parity-reactive-ui')
+    },
   }
 };
