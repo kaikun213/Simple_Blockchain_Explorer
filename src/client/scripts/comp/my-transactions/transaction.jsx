@@ -44,8 +44,7 @@ export class Transaction extends ReactiveComponent {
         </Card>
       )
     } else {
-      return (<div>
-                <Card>
+      return (  <Card fluid>
                   <Card.Content>
                     <Card.Description>
                       <List divided verticalAlign='middle'>
@@ -213,7 +212,6 @@ export class Transaction extends ReactiveComponent {
                     </Card.Description>
                   </Card.Content>
                 </Card>
-              </div>
       );
     }
   }
