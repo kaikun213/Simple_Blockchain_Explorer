@@ -17,6 +17,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.jsx'],
     alias: {
+	/* import local oo7 folder (not from node_modules) */
     	'oo7':path.resolve(__dirname, 'oo7'),
 	'oo7-react':path.resolve(__dirname, 'oo7-react'),
 	'oo7-parity':path.resolve(__dirname, 'oo7-parity'),

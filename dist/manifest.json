@@ -1,8 +1,8 @@
 {
-	"id": "experimental",
-	"name": "Experimental",
-	"description": "Experimental dapps",
+	"id": "myBlockchainExplorer",
+	"name": "My Blockchain Explorer",
+	"description": "A simple dApp to explore the ethereum blockchain.",
 	"version": "0.1",
-	"author": "Parity Technologies Ltd",
-	"iconUrl": "gold.png"
+	"author": "kaikun213, Parity Technologies Ltd",
+	"iconUrl": "parity.png"
 }

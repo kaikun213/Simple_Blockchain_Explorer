@@ -5,14 +5,36 @@
 	<title>Skeleton</title>
 	<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 	<!-- <script src="/parity-utils/parity.js"></script> for dev purpose load localhost:3000 one instead of npm -->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css"></link>
 	<script src="http://localhost:3000/parity-utils/parity.js"></script>
 	<script>
 	window.parity.api._transport._connectTimeout = -1;
 	window.parity.api._subscriptions.subscribe = () => Promise.resolve(1);
 	</script>
+
+	<style>
+		.Site {
+		  display: flex;
+		  min-height: 100vh;
+		  flex-direction: column;
+		  background-color: black;
+		}
+
+		.Site-content {
+		  flex: 1;
+		}
+	</style>
 </head>
-<body>
-	<div id="app"></div>
-	<script src="bundle.js"></script>
+
+<body class='Site>
+	<main class=''Site-content'>
+		<div id="app"></div>
+		<script src="bundle.js"></script>
+	</main>
+	<!--
+	<footer style='color:"white"; background-color:"black";'>
+		Parity Blockchain Explorer 2017
+	</footer>
+	-->
 </body>
 </html>
