@@ -1,6 +1,6 @@
 import React from 'react';
 import { Feed, Icon } from 'semantic-ui-react';
-import { TransactionProgressLabel, Transaction } from 'parity-reactive-ui';
+import { Transaction } from 'parity-reactive-ui';
 import { bonds } from 'oo7-parity';
 import { Hash, Rspan, ReactiveComponent, Ra } from 'oo7-react';
 import { TimeBond, Bond } from 'oo7'

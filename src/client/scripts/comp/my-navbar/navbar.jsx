@@ -1,5 +1,53 @@
-import React from 'react'
-import { Dropdown, Icon, Menu } from 'semantic-ui-react'
+import React from 'react';
+import { Grid, Menu, Dropdown, Checkbox } from 'semantic-ui-react';
+import { InputBond } from 'parity-reactive-ui';
+import { DropdownBond } from './DropdownBond.jsx';
+import { Bond } from 'oo7';
+import { Rspan } from 'oo7-react';
+
+class Navbar extends React.Component {
+  constructor(){
+    super();
+  }
+
+  render() {
+    return (<Grid>
+              <Grid.Row verticalAlign='bottom'>
+                <Grid.Column mobile={8} tablet={8} computer={4}>
+                  {Logo()}
+                  <Checkbox toggle label='update' defaultChecked={true} onChange={(event, data) => this.props.checked.changed(data.checked)}/>
+                </Grid.Column>
+                <Grid.Column mobile={8} tablet={8} computer={4}>
+                  <InputBond bond={this.props.bond} placeholder="Filter by Address" fluid />
+                  {/* <DropdownBond bond={this.props.bond}></DropdownBond>
+                  <Rspan>{this.props.bond}</Rspan> */}
+                </Grid.Column>
+                <Grid.Column mobile={16} tablet={16} computer={8}>
+                  {DropdownNav()}
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+    );
+  }
+
+
+}
+
+
+const Logo = () => (<span style={{marginRight:'20px'}}>
+          <div>
+            <img src="parity.jpg" alt="Parity Logo" height="64" width="64"/>
+            <span style={{
+              marginTop: '10px',
+              fontSize: '50px',
+              fontWeight: 'bold',
+            }}>Parity</span>  <br />
+            <span style={{
+              fontSize: '20px',
+              fontStyle: 'italic'}}>Blockchain Explorer</span>
+          </div>
+        </span>
+)
 
 const DropdownNav = () => (
   <Menu>
@@ -66,24 +114,7 @@ const DropdownNav = () => (
     <Menu.Item>
       Chart
     </Menu.Item>
-    {/* <Dropdown text='Misc' pointing className='link item'>
-      <Dropdown.Menu>
-        <Dropdown.Item>
-          Mining Calculator
-        </Dropdown.Item>
-        <Dropdown.Item>
-          APIs
-        </Dropdown.Item>
-        <Dropdown.Item>
-          Verify Contract
-        </Dropdown.Item>
-        <Dropdown.Item>
-          Byte To Opcode
-        </Dropdown.Item>
-        <Dropdown.Divider />
-      </Dropdown.Menu>
-    </Dropdown> */}
   </Menu>
 )
 
-export default DropdownNav
+export default Navbar;
