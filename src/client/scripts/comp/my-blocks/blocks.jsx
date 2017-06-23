@@ -2,9 +2,9 @@ import React from 'react';
 import {bonds, formatBlockNumber, formatBalance} from 'oo7-parity';
 import { Rspan, Rdiv, Ra, ReactiveComponent } from 'oo7-react';
 import { Bond, TimeBond } from 'oo7';
-import { AccountIcon, Block } from 'parity-reactive-ui';
+import { AccountIcon } from 'parity-reactive-ui';
 import { Feed, Icon } from 'semantic-ui-react'
-// import { Block } from './block.jsx';
+import { Block } from './block.jsx';
 
 const computeTime = ([t1,t2]) => (t1.getTime() - t2.getTime()) / 1000;
 const computeTimeDiff = ([t1,t2]) => Math.floor((t1 - t2.getTime()) / 1000);
@@ -12,11 +12,13 @@ const getParent = b => bonds.blocks[b.parentHash];
 
 class Blocks extends ReactiveComponent {
   constructor() {
-    super(['bonds']);
+    super(['bonds', 'filter']);
     this.time = new TimeBond();
   }
 
   render() {
+    const filterBlocks = b => b.hash.startsWith(this.state.filter) || b.hash.startsWith(this.state.filter,2);
+
     if (this.state.bonds === null || this.state.bonds === undefined){
       return (<div style={{border: '2px solid black', padding: '15px 5% 15px 5%'}}>
                 <Icon name='warning circle' style={{height: '100%'}} />
@@ -24,10 +26,11 @@ class Blocks extends ReactiveComponent {
               </div>
       )
     } else {
+      const blocks = this.state.bonds.filter(filterBlocks);
       return (<div style={{border: '2px solid black', padding: '15px 5% 15px 5%'}}>
                 <h1 style={{fontWeight:'bold'}}>Blocks</h1>
                 <Feed style={{margin:'auto', width:'300px'}}>
-                  {this.state.bonds.map((block,i) => {
+                  {blocks.map((block,i) => {
                     return (
                       <Feed.Event key={i}>
                         <Feed.Label>
@@ -43,9 +46,9 @@ class Blocks extends ReactiveComponent {
                           </Feed.Extra>
                           <Feed.Meta>
                             <a>{block.transactions.length} txns</a> in <Rspan>
-                                          {i === (this.state.bonds.length-1)
+                                          {i === (blocks.length-1)
                                           ? Bond.all([block.timestamp,getParent(block).timestamp]).map(computeTime)
-                                          : Bond.all([block.timestamp,this.state.bonds[i+1].timestamp]).map(computeTime)} sec</Rspan>
+                                          : Bond.all([block.timestamp,blocks[i+1].timestamp]).map(computeTime)} sec</Rspan>
                           </Feed.Meta>
                         </Feed.Content>
                       </Feed.Event>

@@ -1,7 +1,8 @@
 import React from 'react'
-import { Rspan, ReactiveComponent, Hash, Rdiv, Ra } from 'oo7-react';
+import { Rspan, ReactiveComponent, Hash} from 'oo7-react';
 import { bonds, formatBlockNumber} from 'oo7-parity';
 import { Bond } from 'oo7';
+import { InlineAccount } from 'parity-reactive-ui';
 import { Card, List, Icon} from 'semantic-ui-react'
 
 // Reactive Block view
@@ -9,8 +10,7 @@ import { Card, List, Icon} from 'semantic-ui-react'
 // not included: stateRoot, receiptsRoot (txns), step, transactionsRoot, uncles, logsBloom, sealFields, signature
 // planned to include: [nonce, blockReward, unclesReward]
 
-const digits = 6
-const formatDifficulty = d => d.toString(10).substring(0,digits-1) + 'e^' + (d.toString(10).length - (digits-1))
+const formatDifficulty = d => `${d.toString(10).substr(0,d.toString(10).length-12)} TH`
 
 export class Block extends ReactiveComponent {
   constructor() {
@@ -55,7 +55,7 @@ export class Block extends ReactiveComponent {
                         Transactions
                       </List.Content>
                       <List.Content floated='right'>
-                        <Ra>{this.state.block.transactions.length}</Ra> txns
+                        <Rspan>{this.state.block.transactions.length}</Rspan> txns
                       </List.Content>
                     </List.Item> : "" }
                     {this.props.hash ?  <List.Item>
@@ -84,7 +84,7 @@ export class Block extends ReactiveComponent {
                     </List.Item> : "" }
                     {(this.props.author || this.props.miner) ?  <List.Item>
                       <List.Content floated='right'>
-                        <Hash value={this.state.block.author}></Hash>
+                        <InlineAccount address={this.state.block.author}></InlineAccount>
                       </List.Content>
                       <List.Content>
                         Mined by
@@ -92,7 +92,7 @@ export class Block extends ReactiveComponent {
                     </List.Item> : "" }
                     {this.props.minerRegistry ? <List.Item>
                       <List.Content floated='right'>
-                        <Ra>{bonds.registry.canReverse(this.state.block.author).map(b => b? bonds.registry.reverse(this.state.block.author) : "NaN")}</Ra>
+                        <Rspan>{bonds.registry.canReverse(this.state.block.author).map(b => b? bonds.registry.reverse(this.state.block.author) : "NaN")}</Rspan>
                       </List.Content>
                       <List.Content>
                         Miners Registry
@@ -144,7 +144,7 @@ export class Block extends ReactiveComponent {
                         Extra Data
                       </List.Content>
                       <List.Content floated='right'>
-                        <Hash value={this.state.block.extraData}></Hash>
+                        <Hash value={this.state.block.extraData.toString(16)}></Hash>
                       </List.Content>
                     </List.Item> : "" }
                   </List>
