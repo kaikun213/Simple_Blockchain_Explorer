@@ -19,8 +19,8 @@ export class App extends ReactiveComponent {
 
 		this.searchBond = new Bond();
 		this.checked = new Bond();
-		this.checked.tie(this.setUpdate);
-		this.searchBond.tie(search => this.update ? this.setUpdate(search === '') : '');
+		this.checked.tie(this.setUpdate.bind(this));
+		this.searchBond.tie(search => this.update ? this.setUpdate.call(this, search === '') : '');
 		this.init(5);
 	}
 
